@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:AssigmentDemoApp.Converters"
+             x:Class="AssigmentDemoApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="BackgroundColor">#1E2634</Color>
+            <Color x:Key="DarkBackgroundColor">#151C25</Color>
+            <Color x:Key="MenuBackgroundColor">#44545C</Color>
+
+            <converters:MovieImageConverter x:Key="MovieImageConverter" /> 
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

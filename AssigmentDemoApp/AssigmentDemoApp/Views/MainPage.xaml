@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AssigmentDemoApp.MainPage"
+             BackgroundColor="{StaticResource MenuBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MovieImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+            
+            <Style x:Key="MovieTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            
+            <Style x:Key="MovieRatingStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="None"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Frame
+            BackgroundColor="{StaticResource WhiteColor}"
+            Padding="0,0,0,10">
+            <Frame.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS" Value="75"/>
+                    <On Platform="Android" Value="55"/>
+                </OnPlatform>
+
+            </Frame.HeightRequest>
+            <Label
+                Style="{StaticResource MovieTitleStyle}"
+                Text="Movie List"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand"/>
+
+        </Frame>
+        <ListView
+            x:Name="movieListView"
+            CachingStrategy="RetainElement"
+            HasUnevenRows="True"
+            SelectionMode="Single"
+            SeparatorVisibility="None"
+            BackgroundColor="Transparent"
+            VerticalScrollBarVisibility="Never"
+            ItemsSource="{Binding PopularMovies}"
+            SelectedItem="{Binding OnItemSelected}"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            HorizontalOptions="FillAndExpand"
+                            Margin="10,5"
+                            Padding="10"
+                            CornerRadius="10">
+                            <Grid
+                                ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Frame
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    HasShadow="True"
+                                    Padding="1,-2.5"
+                                    Grid.RowSpan="2"
+                                    BorderColor="Black"
+                                    HeightRequest="100"
+                                    IsClippedToBounds="True"
+                                    VerticalOptions="Center">
+                                      <ffimageloading:CachedImage
+                                        Source="{Binding PosterPath, Converter={StaticResource MovieImageConverter}}"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource MovieImageStyle}"
+                                          Margin="0"/>
+                                </Frame>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Grid.Row="0" >
+                                <Label 	
+                                    Text="{Binding Title}"
+                                    Style="{StaticResource MovieTitleStyle}"
+                                    LineBreakMode="TailTruncation"/>
+                                <StackLayout
+                                    Orientation="Horizontal">
+                                    <Image
+                                        Source="CalendarlBack.png"
+                                        HeightRequest="20"
+                                        WidthRequest="20"
+                                        HorizontalOptions="Start"/>
+                                    <Label 	
+                                        Text="{Binding ReleaseDate}"
+                                        VerticalOptions="CenterAndExpand"
+                                        Style="{StaticResource MovieRatingStyle}"/>
+                                </StackLayout>
+                                <Label 	
+                                    Style="{StaticResource MovieRatingStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Ratings: "/>
+                                            <Span Text="{Binding VoteAverage}"/>
+                                            <Span Text=" / 10"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <StackLayout
+                                    Orientation="Horizontal">
+                                    <Image
+                                        Source="Like.png"
+                                        HeightRequest="20"
+                                        WidthRequest="20"
+                                        HorizontalOptions="Start"/>
+                                    <Label 	
+                                        Text="{Binding VoteCount}"
+                                        VerticalOptions="CenterAndExpand"
+                                        Style="{StaticResource MovieRatingStyle}"/>
+                                </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </StackLayout>
+
+</ContentPage>
+

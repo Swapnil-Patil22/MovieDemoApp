@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="AssigmentDemoApp.Views.MovieDetailsPage"
+    Title="Movie Details">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MovieImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+            
+            <Style x:Key="MovieTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            
+            <Style x:Key="MovieRatingStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+             <Style x:Key="MovieOverviewStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout
+            Margin="10,5">
+            <Grid
+                Margin="0,5"
+                ColumnSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ffimageloading:CachedImage
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="200"
+                    Aspect="AspectFit"
+                    Source="{Binding BackdropPath, Converter={StaticResource MovieImageConverter}}"
+                    Style="{StaticResource MovieImageStyle}"/>
+                <Frame
+                    HorizontalOptions="Start"
+                    VerticalOptions="EndAndExpand"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Padding="5,0"
+                    CornerRadius="8"
+                    HeightRequest="110"
+                    HasShadow="False"
+                    Margin="10,0,0,0"
+                    BorderColor="Black">
+                    <ffimageloading:CachedImage
+                        HeightRequest="150"
+                        Source="{Binding PosterPath, Converter={StaticResource MovieImageConverter}}"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource MovieImageStyle}"/>
+                </Frame>
+                <StackLayout
+                    Grid.Column="1"
+                    Grid.Row="1">
+                    <Label 	
+                        Text="{Binding Title}"
+                        Style="{StaticResource MovieTitleStyle}"/>
+                    <Label 	
+                        Style="{StaticResource MovieRatingStyle}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Ratings: "/>
+                                <Span Text="{Binding VoteAverage}"/>
+                                <Span Text=" / 10"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Image
+                            Source="Like.png"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            HorizontalOptions="Start"/>
+                        <Label 	
+                            Text="{Binding VoteCount}"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource MovieRatingStyle}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+            <BoxView
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="{StaticResource BlackColor}"/>
+            <Label
+                Grid.Column="0"
+                Grid.Row="2"
+                VerticalOptions="End"
+                Text="{Binding Overview}"
+                Style="{StaticResource MovieOverviewStyle}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
