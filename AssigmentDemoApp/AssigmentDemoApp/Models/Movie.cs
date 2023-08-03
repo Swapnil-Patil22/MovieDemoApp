@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-//using Newtonsoft.Json;
 
 namespace AssigmentDemoApp.Models
 {
+    /// <summary>
+    /// Details of movie
+    /// </summary>
     public class Movie
     {
         [System.Text.Json.Serialization.JsonPropertyName("id")]

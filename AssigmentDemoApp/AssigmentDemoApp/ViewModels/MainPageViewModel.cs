@@ -25,6 +25,10 @@ namespace AssigmentDemoApp.ViewModels
             });
         }
 
+        /// <summary>
+        /// API to get the popular movie list
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadPopularMoviesAync()
         {
             var result = await APIManager.Instance.GetPopularAsync();
@@ -44,6 +48,10 @@ namespace AssigmentDemoApp.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// on item selected open details page
+        /// </summary>
         private Movie _onItemSelected;
         public Movie OnItemSelected
         {
